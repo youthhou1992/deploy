@@ -55,12 +55,13 @@ def onnx_infer(img):
 
 from utils.rt_infer import Rt_Infer
 def trt_infer(img):
-    trt_path = 'models/ocr_rec_ratio_15.engine'
+    trt_path = 'models/ocr_rec_ratio_15_dynamic.engine'
+    # trt_path = 'models/ocr_rec_ratio_15.engine'
     # trt_path = 'models/ocr_rec_ratio_bat_15.engine'
     crnn_model = Rt_Infer(trt_path)
     if torch.cuda.is_available():
         crnn_model = crnn_model.cuda().eval()
-    im = pad_rec_im(img, wh_ratio=15)
+    im = pad_rec_im(img, wh_ratio=12)
     converter = strLabelConverter(alphabet)
     resize = resizeNormalize()
     pred, conf = crnn_rec(im, crnn_model, converter, (True, resize))

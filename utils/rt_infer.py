@@ -27,7 +27,7 @@ class Rt_Infer(nn.Module):
         self.input_name = 'input_0'
         for i in range(model.num_bindings):
             name = model.get_tensor_name(i)
-            # set_trace()
+            set_trace()
             dtype = trt.nptype(model.get_binding_dtype(i))
             if model.binding_is_input(i):
                 self.input_name = name
@@ -73,6 +73,6 @@ class Rt_Infer(nn.Module):
 
     def from_numpy(self, x):
         return torch.from_numpy(x).to(self.device) if isinstance(x, np.ndarray) else x
-        
+
 if __name__ =="__main__":
     engine_path = r"crnn_w/res.engine"

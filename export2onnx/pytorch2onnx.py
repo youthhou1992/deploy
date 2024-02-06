@@ -24,7 +24,7 @@ def export_to_onnx(model_path, onnx_path, dynamic=False):
     else:
         dynamic_axes = {input_names[0]: {3: 'int_width'},
                         output_names[0]: {0: 'length'}}
-        torch.onnx.export(model, dummy_input, onnx_path, opset_version=12, verbose=True, output_names=output_names, dynamic_axes=dynamic_axes)
+        torch.onnx.export(model, dummy_input, onnx_path, opset_version=12, verbose=True, input_names=input_names, output_names=output_names, dynamic_axes=dynamic_axes)
 
 import sys
 import onnx 
